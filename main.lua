@@ -14,8 +14,16 @@ VIRTUAL_HEIGHT = 243
     Runs when the game first starts up, only once; used to initialize the game.
 ]]
 function love.load()
-    love.graphics.setDefaultFilter('nearest', 'nearest') 
-    push:setupScreen(VIRTUAL_WIDTH,VIRTUAL_HEIGHT,WINDOW_WIDTH, WINDOW_HEIGHT, {
+    love.graphics.setDefaultFilter('nearest', 'nearest')
+
+    -- more "retro-looking" font object we can use for any text
+    smallFont = love.graphics.newFont('font.ttf', 8)
+
+    -- set LÖVE2D's active font to the smallFont obect
+    love.graphics.setFont(smallFont)
+
+    -- initialize window with virtual resolution
+    push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
         resizable = false,
         vsync = true
@@ -31,12 +39,30 @@ end
     Called after update by LÖVE2D, used to draw anything to the screen, updated or otherwise.
 ]]
 function love.draw()
+    -- begin rendering at virtual resolution
     push:apply('start')
-    love.graphics.printf(
-        'Hello Pong!',          -- text to render
-        0,                      -- starting X (0 since we're going to center it based on width)
-        WINDOW_HEIGHT / 2 - 6,  -- starting Y (halfway down the screen)
-        WINDOW_WIDTH,           -- number of pixels to center within (the entire screen here)
-        'center')               -- alignment mode, can be 'center', 'left', or 'right'
+
+    -- clear the screen with a specific color; in this case, a color similar
+    -- to some versions of the original Pong
+    love.graphics.clear(0/255, 0/255, 0/255, 255/255)
+
+    -- draw welcome text toward the top of the screen
+    love.graphics.printf('Hello Pong!', 0, 20, VIRTUAL_WIDTH, 'center')
+
+    --
+    -- paddles are simply rectangles we draw on the screen at certain points,
+    -- as is the ball
+    --
+
+    -- render first paddle (left side)
+    love.graphics.rectangle('fill', 10, 30, 5, 20)
+
+    -- render second paddle (right side)
+    love.graphics.rectangle('fill', VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 50, 5, 20)
+
+    -- render ball (center)
+    love.graphics.rectangle('fill', VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
+
+    -- end rendering at virtual resolution
     push:apply('end')
-    end
+end
