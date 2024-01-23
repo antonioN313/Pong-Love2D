@@ -20,6 +20,7 @@ function love.load()
     -- more "retro-looking" font object we can use for any text
     smallFont = love.graphics.newFont('font.ttf', 8)
 
+    scoreFont = love.graphics.newFont('font.ttf', 32)
     -- set LÖVE2D's active font to the smallFont obect
     love.graphics.setFont(smallFont)
 
@@ -28,27 +29,27 @@ function love.load()
         fullscreen = false,
         resizable = false,
         vsync = true
+    })
 
-	player1Score = 0
+    player1Score = 0
 	player2Score = 0
 
 	player1Y = 30
 	player2Y = VIRTUAL_HEIGHT - 50
-    })
 end
 
 function love.update(dt)
 	-- player 1 movement
 	if love.keyboard.isDown('w') then
-		player1Y += -PADDLE_SPEED * dt
+		player1Y = player1Y + -PADDLE_SPEED * dt
 	elseif love.keyboard.isDown('s') then
-		player1Y += PADDLE_SPEED *dt
+		player1Y = player1Y + PADDLE_SPEED *dt
 	end
 	-- player 2 movement
 	if love.keyboard.isDown('up') then
-		player2Y += -PADDLE_SPEED * dt
+		player2Y = player2Y + -PADDLE_SPEED * dt
 	elseif love.keyboard.isDown('down') then
-		player2Y += PADDLE_SPEED *dt
+		player2Y = player2Y + PADDLE_SPEED *dt
 	end
 end
 function love.keypressed(key)
