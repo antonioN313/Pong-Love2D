@@ -45,7 +45,7 @@ function love.load()
     })
 
     player1Score = 0
-	player2Score = 0
+	  player2Score = 0
 
 	player1 = Paddle(10, 30, 5, 20)
     player2 = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 30, 5, 20)
@@ -88,6 +88,7 @@ end
     Keyboard handling, called by LÖVE2D each frame; 
     passes in the key we pressed so we can access.
 ]]
+
 function love.keypressed(key)
     -- keys can be accessed by string name
     if key == 'escape' then
@@ -132,11 +133,17 @@ function love.draw()
     -- draw score left and right center of the screen
     love.graphics.setFont(scoreFont)
 
+    love.graphics.clear(0/255, 0/255, 0/255, 255/255)
+
+    -- draw welcome text toward the top of the screen
+    love.graphics.setFont(smallFont)
+    love.graphics.printf('Hello Pong!', 0, 20, VIRTUAL_WIDTH, 'center')
+    -- draw score left and right center of the screen
+    love.graphics.setFont(scoreFont)
     love.graphics.print(tostring(player1Score),VIRTUAL_WIDTH / 2 - 50, VIRTUAL_HEIGHT /3)
     love.graphics.print(tostring(player2Score), VIRTUAL_WIDTH / 2 + 30, VIRTUAL_HEIGHT / 3)
     -- paddles are simply rectangles we draw on the screen at certain points,
     -- as is the ball
-
      -- render paddles, now using their class's render method
     player1:render()
     player2:render()
