@@ -29,6 +29,8 @@ PADDLE_SPEED = 200
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
+    love.window.setTitle('Pong')
+
     math.randomseed(os.time())
     -- more "retro-looking" font object we can use for any text
     smallFont = love.graphics.newFont('font.ttf', 8)
@@ -144,6 +146,15 @@ function love.draw()
     -- render ball using its class's render method
     ball:render()
 
+    displayFPS()
+
     -- end rendering at virtual resolution
     push:apply('end')
+end
+
+function displayFPS()
+    -- simple FPS display
+    love.graphics.setFont(smallFont)
+    love.graphics.setColor(0,255/255,0,255/255)
+    love.graphics.print('FPS: '.. tostring(love.timer.getFPS()), 10, 10)
 end
