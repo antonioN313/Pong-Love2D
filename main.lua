@@ -85,7 +85,9 @@ function love.resize(w, h)
 end
 
 function love.update(dt)
-    local aiSpeedFactor = 0.55
+    
+    local aiSpeedFactor = 0.6
+
     if gameState == 'serve' then
         -- before switching to play, initialize ball's velocity based
         -- on player who last scored
