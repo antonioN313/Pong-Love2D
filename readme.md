@@ -15,3 +15,8 @@ O objetivo desse repositorio é de recriar o jogo Pong no framework gráfico [Lo
 
 * [push by Ulysse Ramage](https://github.com/Ulydev/push)
 * [class by Matthias Richter](https://github.com/vrld/hump/tree/master)
+
+### Controles
+
+Moviemento - W e S (Jogador 1)
+esc ( ou escape) - Sair
